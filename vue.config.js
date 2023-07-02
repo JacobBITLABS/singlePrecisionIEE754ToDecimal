@@ -3,8 +3,14 @@ module.exports = defineConfig({
   transpileDependencies: true
 })
 
+// module.exports = {
+//   publicPath: process.env.NODE_ENV === 'production'
+//   ? '/singlePrecisionIEE754ToDecimal/'
+//   : '/'
+// }
+
+
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-  ? '/single-precision-754-to-decimal/'
-  : '/'
+  publicPath: '/singlePrecisionIEE754ToDecimal'
 }
+

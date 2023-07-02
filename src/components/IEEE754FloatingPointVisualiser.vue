@@ -1,16 +1,16 @@
 <template>
   <div>
     <div class="header-div">
-      <h1>IEEE 754 Singe-Precision Floating Point Converter</h1>
+      <h1>IEEE 754 Single-Precision Floating Point Converter</h1>
       <p>Convert from 754 Singe-Precision Floating Point to Decimal. See the interactive calculator below.</p>
     </div>
 
     <div class="input-div">
       <b-form-input
         class="text-input"
-        v-on:input="bitStringToConvert = inputText; arrangeTextInput();"
         v-model="inputText"
-        placeholder="Enter number to convert"
+        v-on:input="bitStringToConvert = inputText; arrangeTextInput();"
+        placeholder="Enter IEEE 754 to convert"
       ></b-form-input>
     </div>
 
@@ -39,7 +39,7 @@
       </b-row>
     </b-container>
 
-    <b-container v-if="bitStringToConvert.length == 32">
+    <b-container v-if="bitStringToConvert.length == 32 && inputOk" style="width:100%; margin: 0, auto;">
       <!-- Exponent -->
       <b-row class="cal-card-row">
         <b-col>
@@ -226,7 +226,7 @@ export default {
       // Define the regular expression pattern
       var pattern = /^[01]{32}$/;
       //this.inputText.length == 32 && 
-      if (this.inputText.length == 32) {
+      if (this.inputText.length == 32 && pattern.test(this.inputText)) {
         if(this.testIEE754String(this.inputText)){
           this.inputOk = true;
           this.setCalsAndCalculate()
@@ -331,9 +331,10 @@ export default {
       }
     }
   },
-  // mounted() {
-  //   this.arrangeTextInput();
-  // }
+  created() {
+    this.bitStringToConvert = this.inputText; 
+    this.arrangeTextInput();
+  }
 };
 </script>
 
